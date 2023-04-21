@@ -107,4 +107,15 @@ def edit_edcat(cps):
     cps["edcat"] = np.select(conditions, choices, default = cps["edcat"])
     return cps
 
+def add_lfstat(cps):
+    conditions = [
+        (cps["empstat"].isin([10, 12])).astype(bool),
+        (cps["empstat"].isin([21, 22])).astype(bool),
+        (cps["empstat"].isin([32, 34, 36])).astype(bool),
+        (cps["age"].le(15)).astype(bool),
+    ]
+    choices = ["E", "U", "N", "K"]
+    cps["lfstat"] = np.select(conditions, choices, default = "M")
+    return cps
 
+     

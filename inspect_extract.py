@@ -27,20 +27,15 @@ cps.query('agecat15.ge("25-29")').agecat15.value_counts().sort_index() # >= rais
 # Here are two other ways using base python replace and map
 # numpy select is clearly the faster than replace and map
 
+# TBD: Add apply to the list of ways. 
+
 cps["empstat"].value_counts().sort_index()
 
-cps["lfstat"] = cps["empstat"].astype(str).replace(["0", "10", "12", "21", "22", "32", "34", "36"], [None, "E", "E", "U", "U", "N", "N", "N"]).astype('category')
-cps.lfstat.value_counts(dropna = False)
+cps["lfstat_alt"] = cps["empstat"].astype(str).replace(["0", "10", "12", "21", "22", "32", "34", "36"], [None, "E", "E", "U", "U", "N", "N", "N"]).astype('category')
+cps.lfstat_alt.value_counts(dropna = False)
 
-cps["lfstat"] = cps["empstat"].astype(str).map({"0": None, "10" : "E", "12" : "E", "21" : "U", "22" : "U", "32" : "N", "34" : "N", "36" : "N"}).astype('category')
-cps.lfstat.value_counts(dropna = False)
+cps["lfstat_alt"] = cps["empstat"].astype(str).map({"0": None, "10" : "E", "12" : "E", "21" : "U", "22" : "U", "32" : "N", "34" : "N", "36" : "N"}).astype('category')
+cps.lfstat_alt.value_counts(dropna = False)
 
-conditions = [cps.empstat.isin([10, 12]).astype(bool),
-              cps.empstat.isin([21, 22]).astype(bool),
-              cps.empstat.isin([32, 34, 36]).astype(bool),
-              True]
-choices = ["E", "U", "N", None]
-cps["lfstat"] = np.select(conditions, choices)
-cps.lfstat.value_counts(dropna = False)
                            
 
