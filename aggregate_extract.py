@@ -11,3 +11,4 @@ def sum_millions(wtfinl):
 # pop_asre = cps.groupby(['agecat15', 'sex', 'race_eth', 'edcat'])['wtfinl'].agg(sum_millions)
 
 pop_asre = cps.groupby(['agecat15', 'sex', 'race_eth', 'edcat']).agg(pop = ('wtfinl', sum_millions))
+
