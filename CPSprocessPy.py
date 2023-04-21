@@ -1,6 +1,5 @@
 
-
-# https://www.section.io/engineering-education/how-to-store-your-python-functions-into-modules/
+# Collect useful functions for working with the CPS here
 
 # the environment of a function is determined at the time it is created not when run
 # so need to import the functions here or
